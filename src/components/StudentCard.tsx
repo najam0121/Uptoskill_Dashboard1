@@ -12,8 +12,8 @@ interface StudentCardProps {
     skillLevel: 'Beginner' | 'Intermediate' | 'Advanced';
     badges: string[];
     location: string;
-    experience: string;
-    rating: number;
+    experience: string;  
+    rating: number; 
     profileImage?: string;
     lastActive: string;
   };
@@ -28,7 +28,7 @@ const skillLevelColors = {
   Advanced: 'bg-success text-success-foreground',
 };
 
-export default function StudentCard({ student, onViewProfile, onContact, delay = 0 }: StudentCardProps) {
+export default function StudentCard({ student, onViewProfile, onContact, delay = 0 }: StudentCardProps) { 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,25 @@ export default function StudentCard({ student, onViewProfile, onContact, delay =
       transition={{ duration: 0.5, delay }}
       whileHover={{ y: -4 }}
     >
-      <Card className="p-6 h-full flex flex-col hover:shadow-elegant transition-all duration-300">
+      <Card
+  className="p-6 h-full flex flex-col border-2 border-transparent transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_4px_rgba(59,130,246,0.5)]"
+  style={{
+    borderStyle: 'solid',
+    borderRadius: 0,
+  }}
+  onMouseEnter={e => {
+    e.currentTarget.style.borderTopColor = '#F97316';
+    e.currentTarget.style.borderLeftColor = '#F97316';
+    e.currentTarget.style.borderBottomColor = '#3B82F6';
+    e.currentTarget.style.borderRightColor = '#3B82F6';
+  }}
+  onMouseLeave={e => {
+    e.currentTarget.style.borderTopColor = 'transparent';
+    e.currentTarget.style.borderLeftColor = 'transparent';
+    e.currentTarget.style.borderBottomColor = 'transparent';
+    e.currentTarget.style.borderRightColor = 'transparent';
+  }}
+>
         <div className="flex items-start gap-4 mb-4">
           <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold">
             {student.name.split(' ').map(n => n[0]).join('')}

@@ -161,15 +161,26 @@
 
 @layer components {
   /* Dashboard-specific component styles */
-  .stat-card {
-    @apply bg-card border border-border rounded-lg p-6 shadow-sm hover:shadow-md;
-    transition: var(--transition-smooth);
-  }
+.stat-card {
+  @apply bg-card border border-border rounded-lg p-6;
+  transition: var(--transition-spring);
+  will-change: transform, box-shadow;
+  animation: glowOnce 1.5s ease-out;
+}
+
+
+.stat-card:hover {
+  box-shadow:
+    0 4px 20px hsl(var(--primary) / 0.3),
+    0 0 15px hsl(var(--primary-glow) / 0.4),
+    var(--shadow-glow);
+  transform: scale(1.03) translateY(-4px);
+
   
-  .stat-card:hover {
-    box-shadow: var(--shadow-elegant);
-    transform: translateY(-2px);
-  }
+  border: 2px solid;
+  border-image: linear-gradient(to right, orange 50%, hsl(var(--primary)) 50%, hsl(var(--primary)) 100%);
+  border-image-slice: 1;
+}
   
   .sidebar-item {
     @apply flex items-center gap-3 px-4 py-3 text-sidebar-foreground rounded-lg;

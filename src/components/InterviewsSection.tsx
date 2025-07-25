@@ -64,6 +64,7 @@ export default function InterviewsSection() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
     >
+      
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-foreground">Upcoming Interviews</h2>
         <Button className="btn-primary">
@@ -82,13 +83,34 @@ export default function InterviewsSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="p-4 hover:shadow-elegant transition-all duration-300">
+              
+              <Card
+  className="p-6 h-full flex flex-col border-2 border-transparent transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_4px_rgba(59,130,246,0.5)]"
+  style={{
+    borderStyle: 'solid',
+    borderRadius: 0,
+  }}
+  onMouseEnter={e => {
+    e.currentTarget.style.borderTopColor = '#F97316';
+    e.currentTarget.style.borderLeftColor = '#F97316';
+    e.currentTarget.style.borderBottomColor = '#3B82F6';
+    e.currentTarget.style.borderRightColor = '#3B82F6';
+  }}
+  onMouseLeave={e => {
+    e.currentTarget.style.borderTopColor = 'transparent';
+    e.currentTarget.style.borderLeftColor = 'transparent';
+    e.currentTarget.style.borderBottomColor = 'transparent';
+    e.currentTarget.style.borderRightColor = 'transparent';
+  }}
+>
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold">
                       {interview.candidateName.split(' ').map(n => n[0]).join('')}
                     </div>
-                    
+
+
                     <div>
                       <h3 className="font-semibold text-foreground">{interview.candidateName}</h3>
                       <p className="text-muted-foreground text-sm">{interview.position}</p>
