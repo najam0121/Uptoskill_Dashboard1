@@ -13,8 +13,8 @@ interface StudentCardProps {
     skillLevel: "Beginner" | "Intermediate" | "Advanced";
     badges: string[];
     location: string;
-    experience: string;  
-    rating: number; 
+    experience: string;
+    rating: number;
     profileImage?: string;
     lastActive: string;
   };
@@ -29,9 +29,6 @@ const skillLevelColors = {
   Advanced: "bg-success text-success-foreground",
 };
 
-<<<<<<< HEAD
-export default function StudentCard({ student, onViewProfile, onContact, delay = 0 }: StudentCardProps) { 
-=======
 export default function StudentCard({
   student,
   onViewProfile,
@@ -52,7 +49,6 @@ export default function StudentCard({
     }));
   };
 
->>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -61,43 +57,13 @@ export default function StudentCard({
       whileHover={{ y: -4 }}
     >
       <Card
-<<<<<<< HEAD
-  className="p-6 h-full flex flex-col border-2 border-transparent transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_4px_rgba(59,130,246,0.5)]"
-  style={{
-    borderStyle: 'solid',
-    borderRadius: 0,
-  }}
-  onMouseEnter={e => {
-    e.currentTarget.style.borderTopColor = '#F97316';
-    e.currentTarget.style.borderLeftColor = '#F97316';
-    e.currentTarget.style.borderBottomColor = '#3B82F6';
-    e.currentTarget.style.borderRightColor = '#3B82F6';
-  }}
-  onMouseLeave={e => {
-    e.currentTarget.style.borderTopColor = 'transparent';
-    e.currentTarget.style.borderLeftColor = 'transparent';
-    e.currentTarget.style.borderBottomColor = 'transparent';
-    e.currentTarget.style.borderRightColor = 'transparent';
-  }}
->
-        <div className="flex items-start gap-4 mb-4">
-          <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold">
-            {student.name.split(' ').map(n => n[0]).join('')}
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-lg text-foreground truncate">{student.name}</h3>
-            <p className="text-muted-foreground text-sm">{student.domain}</p>
-            <div className="flex items-center gap-1 mt-1">
-              <Star className="w-4 h-4 fill-warning text-warning" />
-              <span className="text-sm font-medium">{student.rating}</span>
-=======
         ref={divRef}
         className="relative p-6 h-full flex flex-col hover:shadow-elegant transition-all duration-300 overflow-hidden"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setOpacity(0.6)}
         onMouseLeave={() => setOpacity(0)}
       >
-        {/* 🔵 Smooth Blue Spotlight Effect */}
+        {/* Smooth Blue Spotlight Effect */}
         <div
           className="pointer-events-none absolute inset-0 transition-opacity duration-300 ease-in-out"
           style={{
@@ -125,7 +91,6 @@ export default function StudentCard({
                 <Star className="w-4 h-4 fill-warning text-warning" />
                 <span className="text-sm font-medium">{student.rating}</span>
               </div>
->>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
             </div>
           </div>
 
