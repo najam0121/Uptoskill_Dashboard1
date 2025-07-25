@@ -1,45 +1,34 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  Users,
-  Calendar,
-  Award,
-  CalendarDays,
-  TrendingUp,
-  UserCheck,
-  Target,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
 import StatCard from "@/components/StatCard";
 import StudentCard from "@/components/StudentCard";
 import SearchFilters from "@/components/SearchFilters";
 import InterviewsSection from "@/components/InterviewsSection";
 import HiringAnimation3D from "@/components/3DHiringAnimation";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Users, Calendar, Award, TrendingUp, UserCheck, Target } from "lucide-react";
 
-// Mock data for students
+// Import the image
+import boy2 from "@/assets/boy2.png";
+
+// Mock students data
 const mockStudents = [
   {
     id: "1",
     name: "Md. Najam",
     domain: "MERN Stack Developer",
     skillLevel: "Advanced" as const,
-    badges: [
-      "React Expert",
-      "Node.js",
-      "AWS Certified",
-      "Open Source Contributor",
-    ],
-    location: "Jaiur, Rajasthan",
+    badges: ["React Expert", "Node.js", "AWS Certified", "Open Source Contributor"],
+    location: "Jaipur, Rajasthan",
     experience: "3+ years",
     rating: 4.8,
     lastActive: "2 hours ago",
   },
   {
     id: "2",
-    name: "Astha agrawal",
+    name: "Astha Agrawal",
     domain: "Web Development",
     skillLevel: "Intermediate" as const,
     badges: ["Python", "TensorFlow", "Data Analysis"],
@@ -94,7 +83,11 @@ const mockStudents = [
   },
 ];
 
-const Index = () => {
+export default function Index() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+
   const [filters, setFilters] = useState({
     domain: "All Domains",
     projectExperience: "All Levels",
@@ -115,84 +108,95 @@ const Index = () => {
 
   const handleViewProfile = (studentId: string) => {
     console.log("View profile for student:", studentId);
-    // Implementation for viewing student profile
   };
 
   const handleContact = (studentId: string) => {
     console.log("Contact student:", studentId);
-    // Implementation for contacting student
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/5 to-primary/5">
-      <Navbar />
-      <Sidebar />
+    <div className="flex min-h-screen bg-gradient-to-br from-background via-accent/5 to-primary/5">
+      {/* Sidebar */}
+      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
       {/* Main Content */}
-      <div className="ml-64 pt-16">
-        <div className="p-6">
+      <div
+        className={`flex-1 flex flex-col transition-all duration-300 ${
+          isSidebarOpen ? "lg:ml-64" : "ml-0"
+        }`}
+      >
+        {/* Navbar */}
+        <Navbar onMenuClick={toggleSidebar} />
+
+        {/* Page Content */}
+        <div className="pt-20 px-4 sm:px-6 py-6">
           {/* Hero Section */}
           <motion.section
-            className="hero-gradient rounded-2xl p-8 mb-8 text-white"
+            className="hero-gradient rounded-2xl p-6 sm:p-8 mb-8 text-white"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="grid lg:grid-cols-3 gap-3  items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
               <div>
                 <motion.h1
-                  className="text-4xl font-bold mb-4"
+                  className="text-3xl sm:text-4xl font-bold mb-4"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
                   Welcome to{" "}
-   <span className="bg-gradient-to-r from-[#01BDA5] via-[#43cea2] to-[#FF824C] bg-clip-text text-transparent font-extrabold drop-shadow-lg">
-    UptoSkill
-  </span>{" "}
-  Hiring Dashboard
+                  <span className="bg-gradient-to-r from-[#01BDA5] via-[#43cea2] to-[#FF824C] bg-clip-text text-transparent font-extrabold drop-shadow-lg">
+                    UptoSkill
+                  </span>{" "}
+                  Hiring Dashboard
                 </motion.h1>
                 <motion.p
-                  className="text-xl text-white/90 mb-6"
+                  className="text-base sm:text-xl text-white/90 mb-6"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  Discover talented students, schedule interviews, and build
-                  your dream team with our comprehensive hiring platform.
+                  Discover talented students, schedule interviews, and build your dream team with our comprehensive hiring platform.
                 </motion.p>
                 <motion.div
-                  className="flex gap-4"
+                  className="flex flex-wrap gap-4"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <Button
-                    variant="logo"
-                    size="lg"
-                    className="text-white shadow-lg hover:shadow-2xl"
-                  >
+                  <Button variant="logo" size="lg" className="text-white shadow-lg hover:shadow-2xl">
                     <Target className="w-5 h-5 mr-2" />
                     Start Hiring
                   </Button>
-                  <Button
-                    variant="glass"
-                    size="lg"
-                    className="border-white/30 hover:border-white/50"
-                  >
+                  <Button variant="glass" size="lg" className="border-white/30 hover:border-white/50">
                     <TrendingUp className="w-5 h-5 mr-2" />
                     Learn More
                   </Button>
                 </motion.div>
               </div>
+
+              {/* 3D Animation */}
               <div className="hidden lg:block">
                 <HiringAnimation3D />
               </div>
-              <div className="hidden lg:block">
+
+              {/* Image */}
+              <div className="mt-6 lg:mt-0">
                 <motion.img
+<<<<<<< HEAD
                   src="/src/assets/boy2.png"
                   alt="Programmer"
                   className="w-[340px] h-auto mx-auto drop-shadow-2xl"
+=======
+                  src={boy2}
+                  alt="Young Programmer"
+                  className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[340px] h-auto mx-auto drop-shadow-2xl"
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  whileHover={{ scale: 1.08, rotate: 2 }}
+                  transition={{ duration: 0.8, type: "spring" }}
+>>>>>>> cafc74925143f684e5b10c011301aef3c4ae8cf4
                   style={{ borderRadius: "2rem" }}
                 />
               </div>
@@ -209,7 +213,7 @@ const Index = () => {
             >
               Hiring Overview
             </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <StatCard
                 title="Total Students Available"
                 value="2,847"
@@ -246,7 +250,7 @@ const Index = () => {
             </div>
           </section>
 
-          {/* Search & Filter Students */}
+          {/* Filters + Student Cards */}
           <section className="mb-8">
             <motion.h2
               className="text-2xl font-bold text-foreground mb-6"
@@ -263,7 +267,7 @@ const Index = () => {
               onClearFilters={clearFilters}
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {mockStudents.map((student, index) => (
                 <StudentCard
                   key={student.id}
@@ -291,6 +295,4 @@ const Index = () => {
       </div>
     </div>
   );
-};
-
-export default Index;
+}
