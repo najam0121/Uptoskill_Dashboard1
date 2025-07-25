@@ -193,10 +193,6 @@ const Index = () => {
                   src="/src/assets/boy2.png"
                   alt="Programmer"
                   className="w-[340px] h-auto mx-auto drop-shadow-2xl"
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ scale: 1.08, rotate: 2 }}
-                  transition={{ duration: 0.8, type: "spring" }}
                   style={{ borderRadius: "2rem" }}
                 />
               </div>
@@ -246,6 +242,7 @@ const Index = () => {
                 color="warning"
                 delay={0.4}
               />
+              
             </div>
           </section>
 
