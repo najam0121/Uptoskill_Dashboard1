@@ -184,11 +184,9 @@ export default function Index() {
               {/* Image */}
               <div className="mt-6 lg:mt-0">
                 <motion.img
-<<<<<<< HEAD
                   src="/src/assets/boy2.png"
                   alt="Programmer"
                   className="w-[340px] h-auto mx-auto drop-shadow-2xl"
-=======
                   src={boy2}
                   alt="Young Programmer"
                   className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[340px] h-auto mx-auto drop-shadow-2xl"
@@ -196,7 +194,6 @@ export default function Index() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   whileHover={{ scale: 1.08, rotate: 2 }}
                   transition={{ duration: 0.8, type: "spring" }}
->>>>>>> cafc74925143f684e5b10c011301aef3c4ae8cf4
                   style={{ borderRadius: "2rem" }}
                 />
               </div>
