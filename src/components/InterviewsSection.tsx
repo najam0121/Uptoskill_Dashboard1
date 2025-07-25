@@ -64,19 +64,12 @@ export default function InterviewsSection() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
     >
-<<<<<<< HEAD
-      
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-foreground">Upcoming Interviews</h2>
-        <Button className="btn-primary">
-=======
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
         <h2 className="text-xl sm:text-2xl font-bold text-foreground">
           Upcoming Interviews
         </h2>
         <Button className="w-full sm:w-auto btn-primary">
->>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
           Schedule New Interview
         </Button>
       </div>
@@ -93,44 +86,31 @@ export default function InterviewsSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-<<<<<<< HEAD
-              
               <Card
-  className="p-6 h-full flex flex-col border-2 border-transparent transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_4px_rgba(59,130,246,0.5)]"
-  style={{
-    borderStyle: 'solid',
-    borderRadius: 0,
-  }}
-  onMouseEnter={e => {
-    e.currentTarget.style.borderTopColor = '#F97316';
-    e.currentTarget.style.borderLeftColor = '#F97316';
-    e.currentTarget.style.borderBottomColor = '#3B82F6';
-    e.currentTarget.style.borderRightColor = '#3B82F6';
-  }}
-  onMouseLeave={e => {
-    e.currentTarget.style.borderTopColor = 'transparent';
-    e.currentTarget.style.borderLeftColor = 'transparent';
-    e.currentTarget.style.borderBottomColor = 'transparent';
-    e.currentTarget.style.borderRightColor = 'transparent';
-  }}
->
-
-                <div className="flex items-center justify-between">
-=======
-              <Card className="p-4 sm:p-5 hover:shadow-elegant transition-all duration-300">
+                className="p-6 h-full flex flex-col border-2 border-transparent transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_0_20px_4px_rgba(59,130,246,0.5)]"
+                style={{
+                  borderStyle: 'solid',
+                  borderRadius: 0,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderTopColor = '#F97316';
+                  e.currentTarget.style.borderLeftColor = '#F97316';
+                  e.currentTarget.style.borderBottomColor = '#3B82F6';
+                  e.currentTarget.style.borderRightColor = '#3B82F6';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderTopColor = 'transparent';
+                  e.currentTarget.style.borderLeftColor = 'transparent';
+                  e.currentTarget.style.borderBottomColor = 'transparent';
+                  e.currentTarget.style.borderRightColor = 'transparent';
+                }}
+              >
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                  
                   {/* Candidate Info */}
->>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center text-primary-foreground font-semibold">
                       {interview.candidateName.split(' ').map(n => n[0]).join('')}
                     </div>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
                     <div>
                       <h3 className="font-semibold text-foreground text-base sm:text-lg">
                         {interview.candidateName}
@@ -140,8 +120,7 @@ export default function InterviewsSection() {
                   </div>
 
                   {/* Info and Actions */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
-                    
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full lg:w-auto">
                     {/* Date & Time */}
                     <div className="flex flex-col text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">
