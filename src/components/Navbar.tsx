@@ -1,11 +1,14 @@
-<<<<<<< HEAD
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Bell, Settings, User, Search, Sun, Moon } from 'lucide-react';
+import { Bell, Settings, User, Search, Sun, Moon, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-export default function Navbar() {
+type NavbarProps = {
+  onMenuClick: () => void;
+};
+
+export default function Navbar({ onMenuClick }: NavbarProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -21,18 +24,6 @@ export default function Navbar() {
     setIsDarkMode(prev => !prev);
   };
 
-=======
-import { motion } from "framer-motion";
-import { Bell, Settings, User, Search, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
-type NavbarProps = {
-  onMenuClick: () => void;
-};
-
-export default function Navbar({ onMenuClick }: NavbarProps) {
->>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
   return (
     <motion.nav
       className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-lg border-b border-border shadow-xl transition-all duration-300"
@@ -41,27 +32,10 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
       transition={{ duration: 0.6, ease: "easeOut" }}
       style={{ WebkitBackdropFilter: "blur(16px)" }}
     >
-<<<<<<< HEAD
-      <div className="flex items-center justify-between px-6 py-4 pb-1">
-        {/* Logo */}
-        <motion.div 
-          className="flex items-center gap-2"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        >
-          <div className="w-15 h-9 rounded-xl flex items-center justify-center relative">
-            <img
-              src="/src/assets/uptoskills_logo.png"
-              alt="UptoSkill Logo"
-              className="object-contain w-25 h-25"
-            />
-          </div>
-        </motion.div>
-=======
       <div className="flex items-center justify-between px-4 sm:px-6 py-4 pb-1">
-        {/* Left: Hamburger (always visible) + Logo */}
+        {/* Left: Hamburger + Logo */}
         <div className="flex items-center gap-3">
-          {/* Hamburger visible on all screen sizes */}
+          {/* Hamburger Menu */}
           <motion.button
             aria-label="Toggle sidebar"
             className="p-2 rounded-md hover:bg-gray-100"
@@ -71,7 +45,6 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
           >
             <Menu className="w-6 h-6 text-gray-700" />
           </motion.button>
->>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
 
           {/* Logo */}
           <motion.div
@@ -102,6 +75,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
 
         {/* Right actions */}
         <div className="flex items-center gap-2">
+          {/* Notifications */}
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="w-5 h-5 relative z-10" />
@@ -111,22 +85,21 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
             </Button>
           </motion.div>
 
-<<<<<<< HEAD
-          {/* Theme Toggle Button */}
+          {/* Theme Toggle */}
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </Button>
           </motion.div>
 
-=======
->>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
+          {/* Settings */}
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Button variant="ghost" size="icon">
               <Settings className="w-5 h-5" />
             </Button>
           </motion.div>
 
+          {/* User Profile */}
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Button variant="ghost" size="icon">
               <User className="w-5 h-5" />
