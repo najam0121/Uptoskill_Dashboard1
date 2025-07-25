@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Bell, Settings, User, Search, Sun, Moon } from 'lucide-react';
@@ -20,14 +21,27 @@ export default function Navbar() {
     setIsDarkMode(prev => !prev);
   };
 
+=======
+import { motion } from "framer-motion";
+import { Bell, Settings, User, Search, Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+type NavbarProps = {
+  onMenuClick: () => void;
+};
+
+export default function Navbar({ onMenuClick }: NavbarProps) {
+>>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
   return (
-    <motion.nav 
+    <motion.nav
       className="fixed top-0 left-0 right-0 z-50 bg-white/60 backdrop-blur-lg border-b border-border shadow-xl transition-all duration-300"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       style={{ WebkitBackdropFilter: "blur(16px)" }}
     >
+<<<<<<< HEAD
       <div className="flex items-center justify-between px-6 py-4 pb-1">
         {/* Logo */}
         <motion.div 
@@ -43,19 +57,50 @@ export default function Navbar() {
             />
           </div>
         </motion.div>
+=======
+      <div className="flex items-center justify-between px-4 sm:px-6 py-4 pb-1">
+        {/* Left: Hamburger (always visible) + Logo */}
+        <div className="flex items-center gap-3">
+          {/* Hamburger visible on all screen sizes */}
+          <motion.button
+            aria-label="Toggle sidebar"
+            className="p-2 rounded-md hover:bg-gray-100"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onMenuClick}
+          >
+            <Menu className="w-6 h-6 text-gray-700" />
+          </motion.button>
+>>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
 
-        {/* Search Bar */}
-        <div className="hidden md:flex items-center max-w-md w-full mx-8">
+          {/* Logo */}
+          <motion.div
+            className="flex items-center gap-2"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <div className="w-15 h-9 rounded-xl flex items-center justify-center relative">
+              <img
+                src="/src/assets/uptoskills_logo.png"
+                alt="UptoSkill Logo"
+                className="object-contain w-25 h-25"
+              />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Search Bar (hidden on small screens) */}
+        <div className="hidden md:flex items-center max-w-md w-full mx-4 sm:mx-8">
           <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-            <Input 
-              placeholder="Search students, skills, domains..." 
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input
+              placeholder="Search students, skills, domains..."
               className="pl-10 w-full"
             />
           </div>
         </div>
 
-        {/* Action Buttons */}
+        {/* Right actions */}
         <div className="flex items-center gap-2">
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Button variant="ghost" size="icon" className="relative">
@@ -66,6 +111,7 @@ export default function Navbar() {
             </Button>
           </motion.div>
 
+<<<<<<< HEAD
           {/* Theme Toggle Button */}
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
@@ -73,6 +119,8 @@ export default function Navbar() {
             </Button>
           </motion.div>
 
+=======
+>>>>>>> 7783c64f696cc3d173958018ec47a5fbff1d2b08
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <Button variant="ghost" size="icon">
               <Settings className="w-5 h-5" />
