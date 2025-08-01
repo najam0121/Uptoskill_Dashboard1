@@ -132,15 +132,15 @@ export default function Index() {
         <div className="pt-20 px-4 sm:px-6 py-6">
           {/* Hero Section */}
           <motion.section
-            className="hero-gradient rounded-2xl p-6 sm:p-8 mb-8 text-white"
+            className="hero-gradient rounded-2xl p-6 sm:p-6 mb-8 text-white"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-1 items-center">
               <div>
                 <motion.h1
-                  className="text-3xl sm:text-4xl font-bold mb-4"
+                  className="text-3xl sm:text-4xl font-bold mb-4 select-none "
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -152,7 +152,7 @@ export default function Index() {
                   Hiring Dashboard
                 </motion.h1>
                 <motion.p
-                  className="text-base sm:text-xl text-white/90 mb-6"
+                  className="text-base sm:text-xl text-white/90 mb-6 select-none"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
@@ -186,14 +186,12 @@ export default function Index() {
                 <motion.img
                   src="/src/assets/boy2.png"
                   alt="Programmer"
-                  className="w-[340px] h-auto mx-auto drop-shadow-2xl"
-                  src={boy2}
-                  alt="Young Programmer"
+                  // className="w-[340px] h-auto mx-auto drop-shadow-2xl"
                   className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[340px] h-auto mx-auto drop-shadow-2xl"
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ scale: 1.08, rotate: 2 }}
-                  transition={{ duration: 0.8, type: "spring" }}
+                  // initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  // animate={{ opacity: 1, y: 0, scale: 1 }}
+                  // whileHover={{ scale: 1.08, rotate: 2 }}
+                  // transition={{ duration: 0.8, type: "spring" }}
                   style={{ borderRadius: "2rem" }}
                 />
               </div>

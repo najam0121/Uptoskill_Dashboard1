@@ -78,7 +78,7 @@ function Scene() {
 export default function HiringAnimation3D() {
   return (
     <motion.div 
-      className="w-full h-48 lg:h-64"
+      className="w-full h-48 lg:h-80"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.2 }}

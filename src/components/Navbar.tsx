@@ -52,7 +52,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <div className="w-15 h-9 rounded-xl flex items-center justify-center relative">
+            <div className="w-15 h-9 rounded-xl flex items-center justify-center relative overflow-hidden">
               <img
                 src="/src/assets/uptoskills_logo.png"
                 alt="UptoSkill Logo"
