@@ -142,6 +142,64 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                     />
                   </motion.div>
 
+                  {/* Active indicator – left side */}
+                  {activeItem === item.id && (
+                    <motion.div
+                      className="absolute left-0 top-0 bottom-0 w-1.5 bg-white rounded-r-full"
+                      layoutId="activeIndicator"
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 30,
+                        duration: 0.2,
+                      }}
+                    />
+                  )}
+
+                  {/* Right-side rounded end coverage for active item */}
+                  {activeItem === item.id && (
+                    <motion.div
+                      className="absolute right-0 top-0 bottom-0 w-8 bg-white/20 rounded-l-full backdrop-blur-sm"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 25,
+                        duration: 0.3,
+                      }}
+                    />
+                  )}
+
+                  {/* Bold white rounded shape at the end */}
+                  {activeItem === item.id && (
+                    <motion.div
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-white/30 rounded-full border-2 border-white/40 backdrop-blur-md"
+                      initial={{ opacity: 0, x: 10, scale: 0 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 20,
+                        delay: 0.1,
+                        duration: 0.4,
+                      }}
+                    >
+                      {/* Inner dot for extra emphasis */}
+                      <motion.div
+                        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{
+                          delay: 0.2,
+                          type: "spring",
+                          stiffness: 600,
+                          damping: 15,
+                        }}
+                      />
+                    </motion.div>
+                  )}
+
                   {/* Text */}
                   <motion.span
                     className={`
@@ -164,15 +222,33 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             </div>
           </nav>
 
-          {/* Logout Button */}
-          <div className="p-4">
+          {/* Footer */}
+          <div className="p-4 border-t border-sidebar-border">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-secondary rounded-full flex items-center justify-center">
+                <span className="text-secondary-foreground font-semibold">
+                  HR
+                </span>
+              </div>
+              <div>
+                <p className="text-sidebar-foreground font-medium">
+                  HR Manager
+                </p>
+                <p className="text-sidebar-foreground/70 text-sm">
+                  TechCorp Inc.
+                </p>
+              </div>
+            </div>
+
+            {/* Logout Button */}
+
             <motion.button
-              className="w-full flex items-center gap-4 p-4 rounded-2xl text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200"
-              whileHover={{ scale: 1.02 }}
+              className=" sidebar-item w-full text-red-400 hover:bg-red-500/10 flex items-center gap-3 p-2 rounded-lg"
+              whileHover={{ x: 4 }}
               whileTap={{ scale: 0.98 }}
             >
-              <LogOut className="w-6 h-6" />
-              <span className="font-bold">Logout</span>
+              <LogOut className="w-5 h-5" />
+              <span className="font-medium">Log Out</span>
             </motion.button>
           </div>
         </div>

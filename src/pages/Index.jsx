@@ -8,6 +8,7 @@ import InterviewsSection from "@/components/InterviewsSection";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Users, Calendar, Award, TrendingUp, UserCheck, Target } from "lucide-react";
+import HiringAnimation3D from "@/components/3DHiringAnimation";
 
 // Mock students data
 const mockStudents = [
@@ -15,7 +16,7 @@ const mockStudents = [
     id: "1",
     name: "Md. Najam",
     domain: "MERN Stack Developer",
-    skillLevel: "Advanced",
+    skillLevel: "Advanced" ,
     badges: ["React Expert", "Node.js", "AWS Certified", "Open Source Contributor"],
     location: "Jaipur, Rajasthan",
     experience: "3+ years",
@@ -24,25 +25,58 @@ const mockStudents = [
   },
   {
     id: "2",
-    name: "Priya Sharma",
-    domain: "UI/UX Designer",
-    skillLevel: "Intermediate",
-    badges: ["Figma Expert", "Design Systems", "User Research"],
-    location: "Mumbai, Maharashtra",
-    experience: "2+ years",
+    name: "Astha Agrawal",
+    domain: "Web Development",
+    skillLevel: "Intermediate" ,
+    badges: ["Python", "TensorFlow", "Data Analysis"],
+    location: "Bangalore, India",
+    experience: "2 years",
     rating: 4.6,
     lastActive: "1 day ago",
   },
   {
     id: "3",
-    name: "Arjun Patel",
-    domain: "Data Scientist",
-    skillLevel: "Advanced",
-    badges: ["Python", "Machine Learning", "TensorFlow", "Data Visualization"],
-    location: "Bangalore, Karnataka",
+    name: "Debasmita",
+    domain: "Mobile Development",
+    skillLevel: "Advanced" ,
+    badges: ["React Native", "iOS", "Android", "Flutter"],
+    location: "Seoul, South Korea",
     experience: "4+ years",
     rating: 4.9,
+    lastActive: "5 hours ago",
+  },
+  {
+    id: "4",
+    name: "Ankit",
+    domain: "UI/UX Design",
+    skillLevel: "Intermediate" ,
+    badges: ["Figma", "User Research", "Prototyping"],
+    location: "Barcelona, Spain",
+    experience: "2-3 years",
+    rating: 4.7,
     lastActive: "3 hours ago",
+  },
+  {
+    id: "5",
+    name: "James Wilson",
+    domain: "Data Science",
+    skillLevel: "Beginner" ,
+    badges: ["Python", "SQL", "Statistics"],
+    location: "London, UK",
+    experience: "1 year",
+    rating: 4.3,
+    lastActive: "1 hour ago",
+  },
+  {
+    id: "6",
+    name: "Lisa Chen",
+    domain: "DevOps",
+    skillLevel: "Advanced" ,
+    badges: ["Docker", "Kubernetes", "AWS", "CI/CD"],
+    location: "Toronto, Canada",
+    experience: "5+ years",
+    rating: 4.9,
+    lastActive: "6 hours ago",
   },
 ];
 
@@ -100,10 +134,10 @@ export default function Index() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-1 items-center">
               <div>
                 <motion.h1
-                  className="text-3xl sm:text-4xl font-bold mb-4 select-none"
+                  className="text-3xl sm:text-4xl font-bold mb-8 select-none"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -115,7 +149,7 @@ export default function Index() {
                   Hiring Dashboard
                 </motion.h1>
                 <motion.p
-                  className="text-base sm:text-xl text-white/90 mb-6 select-none"
+                  className="text-base sm:text-xl text-white/90 mb-4  select-none"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
@@ -123,20 +157,29 @@ export default function Index() {
                   Discover talented students, schedule interviews, and build your dream team with our comprehensive hiring platform.
                 </motion.p>
                 <motion.div
-                  className="flex flex-wrap gap-4"
+                  className="flex flex-wrap gap-4 "
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <Button variant="logo" size="lg" className="text-white shadow-lg hover:shadow-2xl">
-                    <Target className="w-5 h-5 mr-2" />
-                    Start Hiring
-                  </Button>
+                  
+                    <Button variant="logo" size="lg" className="glass-button text-white border-white/30 hover:border-white/50">
+                      
+                        <Target className="w-5 h-5 mr-2" />
+                    
+                      Start Hiring
+                    </Button>
+                  
                   <Button variant="glass" size="lg" className="border-white/30 hover:border-white/50">
                     <TrendingUp className="w-5 h-5 mr-2" />
                     Learn More
                   </Button>
                 </motion.div>
+              </div>
+
+              {/* 3D Animation */}
+              <div className="hidden lg:block">
+                <HiringAnimation3D />
               </div>
 
               {/* Image */}

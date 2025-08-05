@@ -1,85 +1,96 @@
+import { useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 import { motion } from 'framer-motion';
-import { Users, Target, Briefcase } from 'lucide-react';
+import * as THREE from 'three';
 
-export default function HiringAnimation3D() {
+function FloatingElements() {
+  const groupRef = useRef(null);
+  
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.2;
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.1;
+    }
+  });
+
   return (
-    <div className="relative w-full h-64 flex items-center justify-center">
-      {/* Central Hub */}
-      <motion.div
-        className="absolute w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg"
-        animate={{
-          scale: [1, 1.1, 1],
-          rotate: [0, 360],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Target className="w-8 h-8 text-white" />
-      </motion.div>
-
-      {/* Orbiting Elements */}
-      {[0, 1, 2, 3, 4].map((index) => (
-        <motion.div
-          key={index}
-          className="absolute w-12 h-12 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center shadow-md"
-          animate={{
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration: 6 + index,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          style={{
-            transformOrigin: `${80 + index * 20}px center`,
-          }}
-        >
-          {index % 2 === 0 ? (
-            <Users className="w-6 h-6 text-white" />
-          ) : (
-            <Briefcase className="w-6 h-6 text-white" />
-          )}
-        </motion.div>
-      ))}
-
-      {/* Floating Text */}
-      <motion.div
-        className="absolute top-4 left-4 text-white font-bold text-lg"
-        animate={{
-          y: [0, -10, 0],
-          opacity: [0.7, 1, 0.7],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        HIRE
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-4 right-4 text-white font-bold text-lg"
-        animate={{
-          y: [0, 10, 0],
-          opacity: [0.7, 1, 0.7],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      >
-        TALENT
-      </motion.div>
-
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl blur-xl" />
-    </div>
+    <group ref={groupRef}>
+      {/* Central hiring icon representation */}
+      <mesh position={[0, 0, 0]} castShadow receiveShadow>
+        <sphereGeometry args={[0.3, 32, 32]} />
+        <meshStandardMaterial color="#3B82F6" />
+      </mesh>
+      
+      {/* Orbiting elements representing students/candidates */}
+      <mesh position={[1.2, 0, 0]} castShadow receiveShadow>
+        <sphereGeometry args={[0.15, 16, 16]} />
+        <meshStandardMaterial color="#F97316" />
+      </mesh>
+      
+      <mesh position={[-1.2, 0.3, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.2, 0.2, 0.2]} />
+        <meshStandardMaterial color="#10B981" />
+      </mesh>
+      
+      <mesh position={[0.6, 1, 0.6]} castShadow receiveShadow>
+        <sphereGeometry args={[0.12, 16, 16]} />
+        <meshStandardMaterial color="#8B5CF6" />
+      </mesh>
+      
+      <mesh position={[-0.8, -0.7, -0.5]} castShadow receiveShadow>
+        <boxGeometry args={[0.15, 0.15, 0.15]} />
+        <meshStandardMaterial color="#EF4444" />
+      </mesh>
+    </group>
   );
 }
 
+function Scene() {
+  return (
+    <>
+      <ambientLight intensity={0.6} />
+      <directionalLight 
+        position={[5, 5, 5]} 
+        intensity={0.8} 
+        castShadow 
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-far={50}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+      />
+      <FloatingElements />
+      <OrbitControls 
+        enableZoom={false} 
+        enablePan={false} 
+        autoRotate 
+        autoRotateSpeed={1}
+        maxPolarAngle={Math.PI / 2}
+        minPolarAngle={Math.PI / 2}
+      />
+    </>
+  );
+}
+
+export default function HiringAnimation3D() {
+  return (
+    <motion.div 
+      className="w-full h-48 lg:h-80"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+    >
+      <Canvas 
+        camera={{ position: [3, 2, 3], fov: 50 }} 
+        shadows
+        gl={{ antialias: true, alpha: true }}
+        dpr={[1, 2]}
+      >
+        <Scene />
+      </Canvas>
+    </motion.div>
+  );
+}
