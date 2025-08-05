@@ -64,11 +64,12 @@ export default function InterviewsSection() {
     >
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
-        <h2 className="text-xl sm:text-2xl font-bold text-foreground flex gap-2 items-center">
-          <Calendar className="w-6 h-6" />
+        <h2 className="text-xl sm:text-2xl font-bold text-foreground ">
+          
           Upcoming Interviews
         </h2>
         <Button className="w-full sm:w-auto btn-primary">
+          <Calendar className="w-6 h-6" />
           Schedule New Interview
         </Button>
       </div>
