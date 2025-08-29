@@ -3,10 +3,13 @@ import { motion } from 'framer-motion';
 import { Bell, Settings, User, Search, Sun, Moon, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar({ onMenuClick }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
+ const navigate = useNavigate();
 
+  
   useEffect(() => {
     const root = document.documentElement;
     if (isDarkMode) {
@@ -19,6 +22,11 @@ export default function Navbar({ onMenuClick }) {
   const toggleTheme = () => {
     setIsDarkMode(prev => !prev);
   };
+  const handleNotificationClick = () => {
+    navigate('/notifications'); // Redirect to notification page
+  };
+
+  
 
   return (
     <motion.nav
@@ -73,7 +81,7 @@ export default function Navbar({ onMenuClick }) {
         <div className="flex items-center gap-2">
           {/* Notifications */}
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Button variant="ghost" size="icon" className="relative">
+            <Button variant="ghost" size="icon" className="relative" onClick={handleNotificationClick}>
               <Bell className="w-5 h-5 relative z-10" />
               <span className="absolute -top-0 -right-0 w-3 h-3 bg-secondary rounded-full flex items-center justify-center z-20">
                 <span className="w-1.5 h-1.5 bg-secondary-foreground rounded-full"></span>

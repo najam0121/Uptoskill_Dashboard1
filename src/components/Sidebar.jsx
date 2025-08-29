@@ -18,12 +18,11 @@ const sidebarItems = [
   { id: "search", label: "Search Students", icon: Search },
   { id: "interviews", label: "Interviews", icon: Calendar },
   { id: "assessments", label: "Assessments", icon: FileText },
-  { id: "mentorship", label: "Mentorship", icon: Users },
   { id: "badges", label: "Verified Badges", icon: Award },
   { id: "notifications", label: "Notifications", icon: Bell },
 ];
 
-export default function Sidebar({ isOpen, setIsOpen }) {
+export default function Sidebar({ isOpen, setIsOpen, onSearchClick , onInterviewsClick, onSectionChange}) {
   const [activeItem, setActiveItem] = useState("dashboard");
   const [isDesktop, setIsDesktop] = useState(false);
 
@@ -100,9 +99,10 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                     }
                   `}
                   onClick={() => {
-                    setActiveItem(item.id);
-                    if (!isDesktop) setIsOpen(false);
-                  }}
+  setActiveItem(item.id);
+  if (onSectionChange) onSectionChange(item.id);
+  if (!isDesktop) setIsOpen(false);
+}}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{

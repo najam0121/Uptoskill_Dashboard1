@@ -7,8 +7,19 @@ import SearchFilters from "@/components/SearchFilters";
 import InterviewsSection from "@/components/InterviewsSection";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Users, Calendar, Award, TrendingUp, UserCheck, Target } from "lucide-react";
+import {
+  Users,
+  Calendar,
+  Award,
+  TrendingUp,
+  UserCheck,
+  Target,
+} from "lucide-react";
 import HiringAnimation3D from "@/components/3DHiringAnimation";
+import { useRef } from "react";
+import AssessmentPage from "../components/AssessmentPage";
+import VerifiedBadges from "../components/VerifiedBadges";
+import NotificationPage from "../components/Notifications";
 
 // Mock students data
 const mockStudents = [
@@ -16,8 +27,13 @@ const mockStudents = [
     id: "1",
     name: "Md. Najam",
     domain: "MERN Stack Developer",
-    skillLevel: "Advanced" ,
-    badges: ["React Expert", "Node.js", "AWS Certified", "Open Source Contributor"],
+    skillLevel: "Advanced",
+    badges: [
+      "React Expert",
+      "Node.js",
+      "AWS Certified",
+      "Open Source Contributor",
+    ],
     location: "Jaipur, Rajasthan",
     experience: "3+ years",
     rating: 4.8,
@@ -27,7 +43,7 @@ const mockStudents = [
     id: "2",
     name: "Astha Agrawal",
     domain: "Web Development",
-    skillLevel: "Intermediate" ,
+    skillLevel: "Intermediate",
     badges: ["Python", "TensorFlow", "Data Analysis"],
     location: "Bangalore, India",
     experience: "2 years",
@@ -38,7 +54,7 @@ const mockStudents = [
     id: "3",
     name: "Debasmita",
     domain: "Mobile Development",
-    skillLevel: "Advanced" ,
+    skillLevel: "Advanced",
     badges: ["React Native", "iOS", "Android", "Flutter"],
     location: "Seoul, South Korea",
     experience: "4+ years",
@@ -49,7 +65,7 @@ const mockStudents = [
     id: "4",
     name: "Ankit",
     domain: "UI/UX Design",
-    skillLevel: "Intermediate" ,
+    skillLevel: "Intermediate",
     badges: ["Figma", "User Research", "Prototyping"],
     location: "Barcelona, Spain",
     experience: "2-3 years",
@@ -60,7 +76,7 @@ const mockStudents = [
     id: "5",
     name: "James Wilson",
     domain: "Data Science",
-    skillLevel: "Beginner" ,
+    skillLevel: "Beginner",
     badges: ["Python", "SQL", "Statistics"],
     location: "London, UK",
     experience: "1 year",
@@ -71,7 +87,7 @@ const mockStudents = [
     id: "6",
     name: "Lisa Chen",
     domain: "DevOps",
-    skillLevel: "Advanced" ,
+    skillLevel: "Advanced",
     badges: ["Docker", "Kubernetes", "AWS", "CI/CD"],
     location: "Toronto, Canada",
     experience: "5+ years",
@@ -82,7 +98,9 @@ const mockStudents = [
 
 export default function Index() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
+  const searchFiltersRef = useRef(null);
+  const interviewsRef = useRef(null);
+  const [activeSection, setActiveSection] = useState("dashboard");
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   const [filters, setFilters] = useState({
@@ -110,11 +128,41 @@ export default function Index() {
   const handleContact = (studentId) => {
     console.log("Contact student:", studentId);
   };
+  const handleSectionChange = (section) => {
+    setActiveSection("dashboard"); // Always show dashboard first
+    setTimeout(() => {
+      if (section === "search" && searchFiltersRef.current) {
+        searchFiltersRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+      if (section === "interviews" && interviewsRef.current) {
+        interviewsRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+      if (section === "assessments") {
+        setActiveSection("assessments");
+      }
+      if (section === "badges") {
+        setActiveSection("badges");
+      }
+      if (section === "notifications") {
+        setActiveSection("notifications");
+      }
+    }, 50); // Small delay to ensure dashboard is rendered before scrolling
+  };
 
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-background via-accent/5 to-primary/5">
       {/* Sidebar */}
-      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <Sidebar
+        isOpen={isSidebarOpen}
+        setIsOpen={setIsSidebarOpen}
+        onSectionChange={handleSectionChange}
+      />
 
       {/* Main Content */}
       <div
@@ -127,156 +175,186 @@ export default function Index() {
 
         {/* Page Content */}
         <div className="pt-20 px-4 sm:px-6 py-6">
-          {/* Hero Section */}
-          <motion.section
-            className="hero-gradient rounded-2xl p-6 sm:p-6 mb-8 text-white"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-1 items-center">
-              <div>
-                <motion.h1
-                  className="text-3xl sm:text-4xl font-bold mb-8 select-none"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
+          {activeSection === "dashboard" && (
+            <>
+              {/* ...dashboard content as before... */}
+              {/* Hero Section */}
+              <motion.section
+                className="hero-gradient rounded-2xl p-6 sm:p-6 mb-8 text-white"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-1 items-center">
+                  <div>
+                    <motion.h1
+                      className="text-3xl sm:text-4xl font-bold mb-8 select-none"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      Welcome to{" "}
+                      <span className="bg-gradient-to-r from-[#01BDA5] via-[#43cea2] to-[#FF824C] bg-clip-text text-transparent font-extrabold drop-shadow-lg">
+                        UptoSkill
+                      </span>{" "}
+                      Hiring Dashboard
+                    </motion.h1>
+                    <motion.p
+                      className="text-base sm:text-xl text-white/90 mb-4  select-none"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      Discover talented students, schedule interviews, and build
+                      your dream team with our comprehensive hiring platform.
+                    </motion.p>
+                    <motion.div
+                      className="flex flex-wrap gap-4 "
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <Button
+                        variant="logo"
+                        size="lg"
+                        className="glass-button text-white border-white/30 hover:border-white/50"
+                      >
+                        <Target className="w-5 h-5 mr-2" />
+                        Start Hiring
+                      </Button>
+
+                      <Button
+                        variant="glass"
+                        size="lg"
+                        className="border-white/30 hover:border-white/50"
+                      >
+                        <TrendingUp className="w-5 h-5 mr-2" />
+                        Learn More
+                      </Button>
+                    </motion.div>
+                  </div>
+
+                  {/* 3D Animation */}
+                  <div className="hidden lg:block">
+                    <HiringAnimation3D />
+                  </div>
+
+                  {/* Image */}
+                  <div className="mt-6 lg:mt-0">
+                    <motion.img
+                      src="/src/assets/boy2.png"
+                      alt="Programmer"
+                      className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[340px] h-auto mx-auto drop-shadow-2xl"
+                      style={{ borderRadius: "2rem" }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5, duration: 0.8 }}
+                    />
+                  </div>
+                </div>
+              </motion.section>
+
+              {/* Stats Overview */}
+              <section className="mb-8">
+                <motion.h2
+                  className="text-2xl font-bold text-foreground mb-6"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  Hiring Overview
+                </motion.h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <StatCard
+                    title="Total Students Available"
+                    value="2,847"
+                    subtitle="+12% from last month"
+                    icon={Users}
+                    color="primary"
+                    delay={0.1}
+                  />
+                  <StatCard
+                    title="Interviews Scheduled"
+                    value="24"
+                    subtitle="This week"
+                    icon={Calendar}
+                    color="secondary"
+                    delay={0.2}
+                  />
+                  <StatCard
+                    title="Mentored Students"
+                    value="156"
+                    subtitle="Active mentorships"
+                    icon={UserCheck}
+                    color="success"
+                    delay={0.3}
+                  />
+                  <StatCard
+                    title="Verified Badges"
+                    value="1,923"
+                    subtitle="Across all students"
+                    icon={Award}
+                    color="warning"
+                    delay={0.4}
+                  />
+                </div>
+              </section>
+
+              {/* Filters + Student Cards */}
+              <section className="mb-8" ref={searchFiltersRef}>
+                <motion.h2
+                  className="text-2xl font-bold text-foreground mb-6"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  Welcome to{" "}
-                  <span className="bg-gradient-to-r from-[#01BDA5] via-[#43cea2] to-[#FF824C] bg-clip-text text-transparent font-extrabold drop-shadow-lg">
-                    UptoSkill
-                  </span>{" "}
-                  Hiring Dashboard
-                </motion.h1>
-                <motion.p
-                  className="text-base sm:text-xl text-white/90 mb-4  select-none"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  Discover talented students, schedule interviews, and build your dream team with our comprehensive hiring platform.
-                </motion.p>
-                <motion.div
-                  className="flex flex-wrap gap-4 "
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  
-                    <Button variant="logo" size="lg" className="glass-button text-white border-white/30 hover:border-white/50">
-                      
-                        <Target className="w-5 h-5 mr-2" />
-                    
-                      Start Hiring
-                    </Button>
-                  
-                  <Button variant="glass" size="lg" className="border-white/30 hover:border-white/50">
-                    <TrendingUp className="w-5 h-5 mr-2" />
-                    Learn More
-                  </Button>
-                </motion.div>
-              </div>
+                  Find the Perfect Candidate
+                </motion.h2>
 
-              {/* 3D Animation */}
-              <div className="hidden lg:block">
-                <HiringAnimation3D />
-              </div>
-
-              {/* Image */}
-              <div className="mt-6 lg:mt-0">
-                <motion.img
-                  src="/src/assets/boy2.png"
-                  alt="Programmer"
-                  className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[340px] h-auto mx-auto drop-shadow-2xl"
-                  style={{ borderRadius: "2rem" }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
+                <SearchFilters
+                  filters={filters}
+                  onFilterChange={handleFilterChange}
+                  onClearFilters={clearFilters}
                 />
-              </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {mockStudents.map((student, index) => (
+                    <StudentCard
+                      key={student.id}
+                      student={student}
+                      onViewProfile={handleViewProfile}
+                      onContact={handleContact}
+                      delay={index * 0.1}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* Interviews Section */}
+              <section className="mb-8" ref={interviewsRef}>
+                <InterviewsSection />
+              </section>
+            </>
+          )}
+          {activeSection === "assessments" && (
+            <div>
+              <AssessmentPage />
+              {/* Render your Assessments page/component here */}
             </div>
-          </motion.section>
+          )}
 
-          {/* Stats Overview */}
-          <section className="mb-8">
-            <motion.h2
-              className="text-2xl font-bold text-foreground mb-6"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              Hiring Overview
-            </motion.h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <StatCard
-                title="Total Students Available"
-                value="2,847"
-                subtitle="+12% from last month"
-                icon={Users}
-                color="primary"
-                delay={0.1}
-              />
-              <StatCard
-                title="Interviews Scheduled"
-                value="24"
-                subtitle="This week"
-                icon={Calendar}
-                color="secondary"
-                delay={0.2}
-              />
-              <StatCard
-                title="Mentored Students"
-                value="156"
-                subtitle="Active mentorships"
-                icon={UserCheck}
-                color="success"
-                delay={0.3}
-              />
-              <StatCard
-                title="Verified Badges"
-                value="1,923"
-                subtitle="Across all students"
-                icon={Award}
-                color="warning"
-                delay={0.4}
-              />
+          {activeSection === "badges" && (
+            <div>
+              <VerifiedBadges />
+              {/* Render your Assessments page/component here */}
             </div>
-          </section>
-
-          {/* Filters + Student Cards */}
-          <section className="mb-8">
-            <motion.h2
-              className="text-2xl font-bold text-foreground mb-6"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              Find the Perfect Candidate
-            </motion.h2>
-
-            <SearchFilters
-              filters={filters}
-              onFilterChange={handleFilterChange}
-              onClearFilters={clearFilters}
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {mockStudents.map((student, index) => (
-                <StudentCard
-                  key={student.id}
-                  student={student}
-                  onViewProfile={handleViewProfile}
-                  onContact={handleContact}
-                  delay={index * 0.1}
-                />
-              ))}
+          )}
+          {activeSection === "notifications" && (
+            <div>
+              <NotificationPage/>
+              {/* Render your Assessments page/component here */}
             </div>
-          </section>
-
-          {/* Interviews Section */}
-          <section className="mb-8">
-            <InterviewsSection />
-          </section>
+          )}
 
           {/* Footer */}
           <footer className="text-center py-8 border-t border-border mt-12">
