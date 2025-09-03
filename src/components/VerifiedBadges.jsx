@@ -2,17 +2,18 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { 
-  Shield, 
-  CheckCircle, 
-  Award, 
-  Calendar, 
+import {
+  Shield,
+  CheckCircle,
+  Award,
+  Calendar,
   User,
   ExternalLink,
   Download,
-  Share2
+  Share2,
 } from "lucide-react";
 import { useRef, useState } from "react";
+import { useToast } from "@/components/ui/use-toast"; // ✅ import shadcn toast
 
 /* --------- Sample User Data -------- */
 const sampleBadges = [
@@ -25,10 +26,19 @@ const sampleBadges = [
     type: "Professional",
     issueDate: "March 15, 2024",
     expiryDate: "March 15, 2027",
-    description: "This badge validates advanced proficiency in React.js development, including hooks, context API, performance optimization, and modern React patterns.",
-    skills: ["React.js", "TypeScript", "State Management", "Performance Optimization", "Testing", "Component Architecture"],
-    blockchainHash: "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z",
-    verificationDate: "March 15, 2024"
+    description:
+      "This badge validates advanced proficiency in React.js development, including hooks, context API, performance optimization, and modern React patterns.",
+    skills: [
+      "React.js",
+      "TypeScript",
+      "State Management",
+      "Performance Optimization",
+      "Testing",
+      "Component Architecture",
+    ],
+    blockchainHash:
+      "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z",
+    verificationDate: "March 15, 2024",
   },
   {
     badgeId: "BDG-2024-002",
@@ -39,10 +49,19 @@ const sampleBadges = [
     type: "Academic",
     issueDate: "February 20, 2024",
     expiryDate: null,
-    description: "Demonstrates comprehensive knowledge in data analysis, machine learning, and statistical modeling with practical project experience.",
-    skills: ["Python", "Machine Learning", "Data Visualization", "Statistics", "Pandas", "Scikit-learn"],
-    blockchainHash: "0x2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a",
-    verificationDate: "February 20, 2024"
+    description:
+      "Demonstrates comprehensive knowledge in data analysis, machine learning, and statistical modeling with practical project experience.",
+    skills: [
+      "Python",
+      "Machine Learning",
+      "Data Visualization",
+      "Statistics",
+      "Pandas",
+      "Scikit-learn",
+    ],
+    blockchainHash:
+      "0x2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a",
+    verificationDate: "February 20, 2024",
   },
   {
     badgeId: "BDG-2024-003",
@@ -53,10 +72,19 @@ const sampleBadges = [
     type: "Skill",
     issueDate: "April 10, 2024",
     expiryDate: "April 10, 2026",
-    description: "Recognition for outstanding user interface and user experience design capabilities with focus on accessibility and modern design principles.",
-    skills: ["Figma", "User Research", "Prototyping", "Accessibility", "Design Systems", "Usability Testing"],
-    blockchainHash: "0x3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b",
-    verificationDate: "April 10, 2024"
+    description:
+      "Recognition for outstanding user interface and user experience design capabilities with focus on accessibility and modern design principles.",
+    skills: [
+      "Figma",
+      "User Research",
+      "Prototyping",
+      "Accessibility",
+      "Design Systems",
+      "Usability Testing",
+    ],
+    blockchainHash:
+      "0x3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b",
+    verificationDate: "April 10, 2024",
   },
   {
     badgeId: "BDG-2024-004",
@@ -67,10 +95,19 @@ const sampleBadges = [
     type: "Professional",
     issueDate: "January 5, 2024",
     expiryDate: "January 5, 2025",
-    description: "Advanced certification in cloud infrastructure design, implementation, and management using AWS services.",
-    skills: ["AWS", "Cloud Architecture", "DevOps", "Kubernetes", "Terraform", "Microservices"],
-    blockchainHash: "0x4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c",
-    verificationDate: "January 5, 2024"
+    description:
+      "Advanced certification in cloud infrastructure design, implementation, and management using AWS services.",
+    skills: [
+      "AWS",
+      "Cloud Architecture",
+      "DevOps",
+      "Kubernetes",
+      "Terraform",
+      "Microservices",
+    ],
+    blockchainHash:
+      "0x4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c",
+    verificationDate: "January 5, 2024",
   },
   {
     badgeId: "BDG-2024-005",
@@ -81,10 +118,19 @@ const sampleBadges = [
     type: "Professional",
     issueDate: "June 1, 2022",
     expiryDate: "June 1, 2024",
-    description: "Comprehensive cybersecurity expertise covering threat analysis, incident response, and security architecture.",
-    skills: ["Network Security", "Penetration Testing", "Incident Response", "Risk Assessment", "CISSP", "Ethical Hacking"],
-    blockchainHash: "0x5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d",
-    verificationDate: "June 1, 2022"
+    description:
+      "Comprehensive cybersecurity expertise covering threat analysis, incident response, and security architecture.",
+    skills: [
+      "Network Security",
+      "Penetration Testing",
+      "Incident Response",
+      "Risk Assessment",
+      "CISSP",
+      "Ethical Hacking",
+    ],
+    blockchainHash:
+      "0x5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d",
+    verificationDate: "June 1, 2022",
   },
   {
     badgeId: "BDG-2024-006",
@@ -95,11 +141,19 @@ const sampleBadges = [
     type: "Achievement",
     issueDate: "May 20, 2024",
     expiryDate: null,
-    description: "Recognition for exceptional leadership in driving innovation initiatives and transformative business strategies.",
-    skills: ["Strategic Planning", "Team Leadership", "Innovation Management", "Change Management", "Business Strategy"],
-    blockchainHash: "0x6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e",
-    verificationDate: "May 20, 2024"
-  }
+    description:
+      "Recognition for exceptional leadership in driving innovation initiatives and transformative business strategies.",
+    skills: [
+      "Strategic Planning",
+      "Team Leadership",
+      "Innovation Management",
+      "Change Management",
+      "Business Strategy",
+    ],
+    blockchainHash:
+      "0x6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e",
+    verificationDate: "May 20, 2024",
+  },
 ];
 
 /* --------- Utility for badge verification status colors -------- */
@@ -196,8 +250,8 @@ export function VerifiedBadgeCard({
                 <CheckCircle className="w-3 h-3 mr-1" />
                 {badge.status}
               </Badge>
-              <Badge 
-                variant="outline" 
+              <Badge
+                variant="outline"
                 className={badgeTypeColors[badge.type]}
               >
                 {badge.type}
@@ -234,7 +288,9 @@ export function VerifiedBadgeCard({
             {/* Skills/competencies */}
             {badge.skills && badge.skills.length > 0 && (
               <div>
-                <h4 className="text-sm font-medium mb-2">Skills Demonstrated:</h4>
+                <h4 className="text-sm font-medium mb-2">
+                  Skills Demonstrated:
+                </h4>
                 <div className="flex flex-wrap gap-1">
                   {badge.skills.slice(0, 4).map((skill) => (
                     <Badge key={skill} variant="secondary" className="text-xs">
@@ -301,14 +357,40 @@ export function VerifiedBadgeCard({
 
 /* --------- Main Page Component -------- */
 export default function VerifiedBadgePage() {
+  const { toast } = useToast();
+
   const handleDownload = (badgeId) => {
     console.log("Downloading badge:", badgeId);
     // Implement download logic here
   };
 
   const handleShare = (badgeId) => {
-    console.log("Sharing badge:", badgeId);
-    // Implement share logic here
+    const badge = sampleBadges.find((b) => b.badgeId === badgeId);
+    if (!badge) return;
+
+    const shareData = {
+      title: badge.title,
+      text: `I earned the "${badge.title}" badge from ${badge.issuer}!`,
+      url: `${window.location.origin}/badges/${badge.badgeId}`,
+    };
+
+    if (navigator.share) {
+      navigator
+        .share(shareData)
+        .then(() => {
+          toast({
+            title: "Shared!",
+            description: `${badge.title} badge has been shared.`,
+          });
+        })
+        .catch((err) => console.error("Error sharing:", err));
+    } else {
+      navigator.clipboard.writeText(shareData.url);
+      toast({
+        title: "Link copied",
+        description: "Badge link copied to clipboard!",
+      });
+    }
   };
 
   const handleViewDetails = (badgeId) => {
@@ -324,7 +406,8 @@ export default function VerifiedBadgePage() {
           Verified Badges
         </h1>
         <p className="text-muted-foreground">
-          Browse and manage your blockchain-verified digital badges and certifications.
+          Browse and manage your blockchain-verified digital badges and
+          certifications.
         </p>
       </div>
 
@@ -346,25 +429,25 @@ export default function VerifiedBadgePage() {
       <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="p-4 text-center">
           <div className="text-2xl font-bold text-success">
-            {sampleBadges.filter(b => b.status === 'Verified').length}
+            {sampleBadges.filter((b) => b.status === "Verified").length}
           </div>
           <div className="text-sm text-muted-foreground">Verified Badges</div>
         </Card>
         <Card className="p-4 text-center">
           <div className="text-2xl font-bold text-warning">
-            {sampleBadges.filter(b => b.status === 'Pending').length}
+            {sampleBadges.filter((b) => b.status === "Pending").length}
           </div>
           <div className="text-sm text-muted-foreground">Pending Review</div>
         </Card>
         <Card className="p-4 text-center">
           <div className="text-2xl font-bold text-primary">
-            {sampleBadges.filter(b => b.status === 'Under Review').length}
+            {sampleBadges.filter((b) => b.status === "Under Review").length}
           </div>
           <div className="text-sm text-muted-foreground">Under Review</div>
         </Card>
         <Card className="p-4 text-center">
           <div className="text-2xl font-bold text-destructive">
-            {sampleBadges.filter(b => b.status === 'Expired').length}
+            {sampleBadges.filter((b) => b.status === "Expired").length}
           </div>
           <div className="text-sm text-muted-foreground">Expired</div>
         </Card>
