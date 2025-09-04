@@ -2,10 +2,6 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-<<<<<<< HEAD
-import {Shield,CheckCircle,Award,Calendar,User,ExternalLink,Download,Share2,X,} from "lucide-react";
-import { useRef, useState, useEffect } from "react";
-=======
 import {
   Shield,
   CheckCircle,
@@ -15,12 +11,12 @@ import {
   ExternalLink,
   Download,
   Share2,
+  X,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast"; // ✅ import shadcn toast
 
 /* --------- Sample User Data -------- */
->>>>>>> 46c84376a5eb40cac925983af91977fdb4625b06
 const sampleBadges = [
   {
     badgeId: "BDG-2024-001",
@@ -41,8 +37,7 @@ const sampleBadges = [
       "Testing",
       "Component Architecture",
     ],
-    blockchainHash:
-      "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z",
+    blockchainHash: "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z",
     verificationDate: "March 15, 2024",
   },
   {
@@ -64,8 +59,7 @@ const sampleBadges = [
       "Pandas",
       "Scikit-learn",
     ],
-    blockchainHash:
-      "0x2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a",
+    blockchainHash: "0x2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a",
     verificationDate: "February 20, 2024",
   },
   {
@@ -87,8 +81,7 @@ const sampleBadges = [
       "Design Systems",
       "Usability Testing",
     ],
-    blockchainHash:
-      "0x3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b",
+    blockchainHash: "0x3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b",
     verificationDate: "April 10, 2024",
   },
   {
@@ -102,9 +95,6 @@ const sampleBadges = [
     expiryDate: "January 5, 2025",
     description:
       "Advanced certification in cloud infrastructure design, implementation, and management using AWS services.",
-<<<<<<< HEAD
-    skills: ["AWS", "Cloud Architecture", "DevOps", "Kubernetes", "Terraform", "Microservices"],
-=======
     skills: [
       "AWS",
       "Cloud Architecture",
@@ -113,9 +103,7 @@ const sampleBadges = [
       "Terraform",
       "Microservices",
     ],
->>>>>>> 46c84376a5eb40cac925983af91977fdb4625b06
-    blockchainHash:
-      "0x4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c",
+    blockchainHash: "0x4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c",
     verificationDate: "January 5, 2024",
   },
   {
@@ -137,8 +125,7 @@ const sampleBadges = [
       "CISSP",
       "Ethical Hacking",
     ],
-    blockchainHash:
-      "0x5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d",
+    blockchainHash: "0x5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d",
     verificationDate: "June 1, 2022",
   },
   {
@@ -159,8 +146,7 @@ const sampleBadges = [
       "Change Management",
       "Business Strategy",
     ],
-    blockchainHash:
-      "0x6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e",
+    blockchainHash: "0x6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e",
     verificationDate: "May 20, 2024",
   },
 ];
@@ -172,7 +158,7 @@ const verificationStatusColors = {
   Expired: "bg-destructive text-destructive-foreground",
   "Under Review": "bg-primary text-primary-foreground",
 };
-  const badgeTypeColors = {
+const badgeTypeColors = {
   Academic: "bg-blue-100 text-blue-800 border-blue-200",
   Professional: "bg-purple-100 text-purple-800 border-purple-200",
   Skill: "bg-green-100 text-green-800 border-green-200",
@@ -199,10 +185,7 @@ function SimpleModal({ open, onClose, badge }) {
       role="dialog"
     >
       {/* overlay */}
-      <div
-        className="absolute inset-0 bg-black/50"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
 
       {/* dialog box */}
       <div
@@ -213,7 +196,9 @@ function SimpleModal({ open, onClose, badge }) {
         <div className="flex items-start justify-between p-4 border-b">
           <div>
             <h3 className="text-lg font-semibold">{badge.title}</h3>
-            <p className="text-sm text-muted-foreground">Issued by {badge.issuer}</p>
+            <p className="text-sm text-muted-foreground">
+              Issued by {badge.issuer}
+            </p>
           </div>
           <button
             onClick={onClose}
@@ -228,7 +213,9 @@ function SimpleModal({ open, onClose, badge }) {
           <div className="flex items-center gap-2">
             <Shield className="w-4 h-4 text-success" />
             <span className="font-medium text-success">{badge.status}</span>
-            <span className="ml-2 text-xs px-2 py-1 rounded border">{badge.type}</span>
+            <span className="ml-2 text-xs px-2 py-1 rounded border">
+              {badge.type}
+            </span>
           </div>
 
           <div className="space-y-1">
@@ -257,7 +244,10 @@ function SimpleModal({ open, onClose, badge }) {
               <h4 className="text-sm font-medium mb-2">Skills:</h4>
               <div className="flex flex-wrap gap-2">
                 {badge.skills.map((s) => (
-                  <span key={s} className="text-xs px-2 py-1 bg-gray-100 rounded">
+                  <span
+                    key={s}
+                    className="text-xs px-2 py-1 bg-gray-100 rounded"
+                  >
                     {s}
                   </span>
                 ))}
@@ -266,9 +256,15 @@ function SimpleModal({ open, onClose, badge }) {
           )}
 
           <div className="bg-gray-50 border rounded-lg p-3 text-xs">
-            <p><strong>Badge ID:</strong> {badge.badgeId}</p>
-            <p><strong>Blockchain Hash:</strong> {badge.blockchainHash}</p>
-            <p><strong>Verified on:</strong> {badge.verificationDate}</p>
+            <p>
+              <strong>Badge ID:</strong> {badge.badgeId}
+            </p>
+            <p>
+              <strong>Blockchain Hash:</strong> {badge.blockchainHash}
+            </p>
+            <p>
+              <strong>Verified on:</strong> {badge.verificationDate}
+            </p>
           </div>
         </div>
 
@@ -298,7 +294,7 @@ export function VerifiedBadgeCard({
   const handleMouseMove = (e) => {
     if (!divRef.current) return;
     const rect = divRef.current.getBoundingClientRect();
-      setPosition((prev) => ({
+    setPosition((prev) => ({
       x: prev.x + (e.clientX - rect.left - prev.x) * 0.2,
       y: prev.y + (e.clientY - rect.top - prev.y) * 0.2,
     }));
@@ -318,7 +314,7 @@ export function VerifiedBadgeCard({
         onMouseEnter={() => setOpacity(0.6)}
         onMouseLeave={() => setOpacity(0)}
       >
-          <div
+        <div
           className="pointer-events-none absolute inset-0 transition-opacity duration-300 ease-in-out"
           style={{
             opacity,
@@ -327,7 +323,7 @@ export function VerifiedBadgeCard({
           }}
         />
 
-          <div className="relative z-10">
+        <div className="relative z-10">
           <div className="flex items-start gap-4 mb-4">
             <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-primary-foreground">
               <Award className="w-8 h-8" />
@@ -349,22 +345,18 @@ export function VerifiedBadgeCard({
             </div>
           </div>
 
-            <div className="space-y-3 mb-4 flex-1">
+          <div className="space-y-3 mb-4 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
               <Badge className={verificationStatusColors[badge.status]}>
                 <CheckCircle className="w-3 h-3 mr-1" />
                 {badge.status}
               </Badge>
               <Badge variant="outline" className={badgeTypeColors[badge.type]}>
-              <Badge
-                variant="outline"
-                className={badgeTypeColors[badge.type]}
-              >
                 {badge.type}
               </Badge>
             </div>
 
-              <div className="space-y-2">
+            <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Calendar className="w-4 h-4" />
                 <span>Issued: {badge.issueDate}</span>
@@ -377,16 +369,18 @@ export function VerifiedBadgeCard({
               )}
             </div>
 
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <User className="w-4 h-4" />
               <span>Awarded to: {badge.recipient}</span>
             </div>
 
-              <div className="bg-muted/50 rounded-lg p-3">
-              <p className="text-sm text-muted-foreground">{badge.description}</p>
+            <div className="bg-muted/50 rounded-lg p-3">
+              <p className="text-sm text-muted-foreground">
+                {badge.description}
+              </p>
             </div>
 
-              {badge.skills && badge.skills.length > 0 && (
+            {badge.skills && badge.skills.length > 0 && (
               <div>
                 <h4 className="text-sm font-medium mb-2">
                   Skills Demonstrated:
@@ -406,10 +400,12 @@ export function VerifiedBadgeCard({
               </div>
             )}
 
-              <div className="bg-success/10 border border-success/20 rounded-lg p-3">
+            <div className="bg-success/10 border border-success/20 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-2">
                 <Shield className="w-4 h-4 text-success" />
-                <span className="text-sm font-medium text-success">Verification Details</span>
+                <span className="text-sm font-medium text-success">
+                  Verification Details
+                </span>
               </div>
               <div className="space-y-1 text-xs text-muted-foreground">
                 <p>Badge ID: {badge.badgeId}</p>
@@ -419,7 +415,7 @@ export function VerifiedBadgeCard({
             </div>
           </div>
 
-            <div className="flex gap-2 pt-4 border-t border-border">
+          <div className="flex gap-2 pt-4 border-t border-border">
             {/* NOTE: keep signature as badgeId so we don't break existing callers */}
             <Button
               variant="outline"
@@ -453,15 +449,14 @@ export function VerifiedBadgeCard({
     </motion.div>
   );
 }
-  export default function VerifiedBadgePage() {
-  const [selectedBadgeId, setSelectedBadgeId] = useState(null);
-    const handleDownload = (badgeId) => {
-
-/* --------- Main Page Component -------- */
 export default function VerifiedBadgePage() {
   const { toast } = useToast();
-
+  const [selectedBadgeId, setSelectedBadgeId] = useState(null);
   const handleDownload = (badgeId) => {
+    /* --------- Main Page Component -------- */
+    // export default function VerifiedBadgePage() {
+
+    // const handleDownload = (badgeId) => {
     console.log("Downloading badge:", badgeId);
     const badge = sampleBadges.find((b) => b.badgeId === badgeId);
     if (!badge) return;
@@ -538,19 +533,21 @@ export default function VerifiedBadgePage() {
   };
 
   const handleViewDetails = (badgeId) => {
-
     const found = sampleBadges.find((b) => b.badgeId === badgeId);
     if (found) setSelectedBadgeId(badgeId);
     else console.warn("Badge not found:", badgeId);
   };
 
-  const selectedBadge = sampleBadges.find((b) => b.badgeId === selectedBadgeId) || null;
+  const selectedBadge =
+    sampleBadges.find((b) => b.badgeId === selectedBadgeId) || null;
 
   return (
     <div className="container mx-auto p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground mb-2">Verified Badges</h1>
+        <h1 className="text-3xl font-bold text-foreground mb-2">
+          Verified Badges
+        </h1>
         <p className="text-muted-foreground">
           Browse and manage your blockchain-verified digital badges and
           certifications.
