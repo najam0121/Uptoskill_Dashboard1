@@ -97,7 +97,7 @@ const Assessments = () => {
 
   const filteredAssessments = assessments.filter(assessment => {
     const matchesSearch = assessment.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         assessment.description.toLowerCase().includes(searchTerm.toLowerCase());
+                        assessment.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = filterStatus === 'all' || assessment.status === filterStatus;
     return matchesSearch && matchesStatus;
   });
