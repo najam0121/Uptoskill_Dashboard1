@@ -2,8 +2,25 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+<<<<<<< HEAD
 import {Shield,CheckCircle,Award,Calendar,User,ExternalLink,Download,Share2,X,} from "lucide-react";
 import { useRef, useState, useEffect } from "react";
+=======
+import {
+  Shield,
+  CheckCircle,
+  Award,
+  Calendar,
+  User,
+  ExternalLink,
+  Download,
+  Share2,
+} from "lucide-react";
+import { useRef, useState } from "react";
+import { useToast } from "@/components/ui/use-toast"; // ✅ import shadcn toast
+
+/* --------- Sample User Data -------- */
+>>>>>>> 46c84376a5eb40cac925983af91977fdb4625b06
 const sampleBadges = [
   {
     badgeId: "BDG-2024-001",
@@ -85,7 +102,18 @@ const sampleBadges = [
     expiryDate: "January 5, 2025",
     description:
       "Advanced certification in cloud infrastructure design, implementation, and management using AWS services.",
+<<<<<<< HEAD
     skills: ["AWS", "Cloud Architecture", "DevOps", "Kubernetes", "Terraform", "Microservices"],
+=======
+    skills: [
+      "AWS",
+      "Cloud Architecture",
+      "DevOps",
+      "Kubernetes",
+      "Terraform",
+      "Microservices",
+    ],
+>>>>>>> 46c84376a5eb40cac925983af91977fdb4625b06
     blockchainHash:
       "0x4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c",
     verificationDate: "January 5, 2024",
@@ -328,6 +356,10 @@ export function VerifiedBadgeCard({
                 {badge.status}
               </Badge>
               <Badge variant="outline" className={badgeTypeColors[badge.type]}>
+              <Badge
+                variant="outline"
+                className={badgeTypeColors[badge.type]}
+              >
                 {badge.type}
               </Badge>
             </div>
@@ -356,7 +388,9 @@ export function VerifiedBadgeCard({
 
               {badge.skills && badge.skills.length > 0 && (
               <div>
-                <h4 className="text-sm font-medium mb-2">Skills Demonstrated:</h4>
+                <h4 className="text-sm font-medium mb-2">
+                  Skills Demonstrated:
+                </h4>
                 <div className="flex flex-wrap gap-1">
                   {badge.skills.slice(0, 4).map((skill) => (
                     <Badge key={skill} variant="secondary" className="text-xs">
@@ -422,6 +456,12 @@ export function VerifiedBadgeCard({
   export default function VerifiedBadgePage() {
   const [selectedBadgeId, setSelectedBadgeId] = useState(null);
     const handleDownload = (badgeId) => {
+
+/* --------- Main Page Component -------- */
+export default function VerifiedBadgePage() {
+  const { toast } = useToast();
+
+  const handleDownload = (badgeId) => {
     console.log("Downloading badge:", badgeId);
     const badge = sampleBadges.find((b) => b.badgeId === badgeId);
     if (!badge) return;
@@ -468,6 +508,33 @@ export function VerifiedBadgeCard({
   const handleShare = (badgeId) => {
     console.log("Sharing badge:", badgeId);
     // implement share logic
+
+    const badge = sampleBadges.find((b) => b.badgeId === badgeId);
+    if (!badge) return;
+
+    const shareData = {
+      title: badge.title,
+      text: `I earned the "${badge.title}" badge from ${badge.issuer}!`,
+      url: `${window.location.origin}/badges/${badge.badgeId}`,
+    };
+
+    if (navigator.share) {
+      navigator
+        .share(shareData)
+        .then(() => {
+          toast({
+            title: "Shared!",
+            description: `${badge.title} badge has been shared.`,
+          });
+        })
+        .catch((err) => console.error("Error sharing:", err));
+    } else {
+      navigator.clipboard.writeText(shareData.url);
+      toast({
+        title: "Link copied",
+        description: "Badge link copied to clipboard!",
+      });
+    }
   };
 
   const handleViewDetails = (badgeId) => {
@@ -485,7 +552,8 @@ export function VerifiedBadgeCard({
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground mb-2">Verified Badges</h1>
         <p className="text-muted-foreground">
-          Browse and manage your blockchain-verified digital badges and certifications.
+          Browse and manage your blockchain-verified digital badges and
+          certifications.
         </p>
       </div>
 
